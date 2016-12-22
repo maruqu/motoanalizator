@@ -113,9 +113,9 @@ class MotoScraper(object):
         return int(price)
 
     def __find_location(self, item):
+        """Return only province"""
         location = item.find("span", {"class": "offer-item__location"})
-        location_stripped = ' '.join(
-            [string for string in location.stripped_strings])
+        location_stripped = [string for string in location.stripped_strings][-1][1:-1]
 
         return location_stripped
 
