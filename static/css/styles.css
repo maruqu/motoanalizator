@@ -1,0 +1,64 @@
+#input	{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#map {
+        height: 100%;
+}
+
+#map-container{
+	height: 400px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+#search{
+	top: 46vh;
+	position: fixed;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position:relative;
+    overflow-x:hidden; 
+
+}
+
+body {
+  padding-top: 50px;
+
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+
+}
+
+.navbar-center
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+}
+
+.panel {
+  text-align: center;
+}
+#index-body { 
+  background: url(../images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: fixed;
+}

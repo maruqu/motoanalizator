@@ -1,0 +1,125 @@
+<!doctype html>
+
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+
+  <title>Moto Analizator</title>
+  <meta name="author" content="Artur Mruk">
+
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand navbar-center" href="/">Moto Analizator</a>
+      </div>  
+    </div>
+  </nav>
+  <div class="page">
+
+    <div  class="col-lg-12">
+      <div id="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Średnia Cena / Rocznik</h3>
+          </div>
+          <div class="panel-body">
+            <div id="chart_year_price" class="ct-chart ct-golden-section"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Średni Przebieg / Rocznik</h3>
+          </div>
+          <div class="panel-body">
+            <div id="chart_year_milage" class="ct-chart ct-golden-section"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Ilość ogłoszeń / Rocznik</h3>
+          </div>
+          <div class="panel-body">
+            <div id="chart_year_quantity" class="ct-chart ct-golden-section"></div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Ilość ogłoszeń / Typ paliwa</h3>
+          </div>
+          <div class="panel-body">
+            <div id="chart_fuel_type" class="ct-chart ct-golden-section"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Strona powstała w celach edukacyjnych, nie jest używana komercyjnie, dane są własnaścią serwisu otomoto.pl i nie są nigdzie magazynowane.</p>
+  </div>
+
+  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+  <script src="{{ url_for('static', filename='js/chartist-plugin-pointlabels.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGFxqi2xRklUuDF4x8OZPk24RUpEKt3OQ"></script>
+
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<!--<link rel="stylesheet" href="styles.css">-->
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  $.LoadingOverlay("show");
+  $.ajax({
+    url: '/data',
+    data: "url={{url}}",
+    timeout: 600000,
+    type: 'POST',
+    success: function(response) {
+      data = JSON.parse(response);
+      renderCharts();
+      initialize();
+      placeMarkers();
+      $.LoadingOverlay("hide");
+    },
+    error: function(error) {
+      console.log(error);
+      $.LoadingOverlay("hide");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

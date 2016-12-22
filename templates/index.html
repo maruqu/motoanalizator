@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+
+  <title>Moto Analizator</title>
+  <meta name="author" content="Artur Mruk">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body id="index-body">
+
+
+<div class="row" >
+    <div class="col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2" id="search" >
+      <form id="url-form" role="form" method="POST" action="stats">
+        <div class="input-group">
+            <input type="text" name="url" class="form-control" id="url" placeholder="Wklej url wyszukiwania z otoMoto"> 
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" >Analizuj!</button>
+            </span>
+        </div><!-- /input-group -->
+      </form>
+    </div><!-- /.col-lg-4 -->
+</div><!-- /.row -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
