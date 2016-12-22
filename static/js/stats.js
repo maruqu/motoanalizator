@@ -14,26 +14,6 @@ function initialize() {
 };
 
 
-function codeAddress(city) {
-  var address = city;
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == 'OK') {
-      var marker = new google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-}
-
-function sleep(delay) {
-  var start = new Date().getTime();
-  while (new Date().getTime() < start + delay);
-};
-
-
 function placeMarkers() {
   cities = data.locationData;
   for (var i = 0; i < cities.labels.length; i++) {
@@ -48,12 +28,9 @@ function placeMarkers() {
         markers.push(marker);
       };
     };
-
   };
-
   var markerCluster = new MarkerClusterer(map, markers,
     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
 };
 
 
@@ -97,18 +74,3 @@ function renderCharts(){
     ]
   });
 }
-
-$('#urlForm').submit(function(e) {
-  e.preventDefault();
-  $.ajax({
-    url: '/data',
-    data: $('form').serialize(),
-    timeout: 6000000,
-    type: 'POST'
-  }).done(function(response){
-    markers = []
-    data = JSON.parse(response);
-    renderCharts();
-    placeMarkers();
-        });
-});
