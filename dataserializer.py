@@ -68,7 +68,7 @@ def prepare_location_data(location_grouped_df):
         locations.append(location)
         quantities.append(len(group))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(locations)) as executor:
         geocoded_locations = list(executor.map(geocode, locations))
 
     data = {}
