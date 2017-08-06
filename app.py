@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-import config
-from motoscraper import MotoScraper
+from scraper import MotoScraper
 from dataserializer import *
 
 
@@ -9,25 +8,23 @@ app.config.from_object('config.BaseConfig')
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('index.html')
 
+
 @app.route('/stats', methods=['POST'])
 def stats():
-    request.form['url']
-
-    return render_template('stats.html', url=request.form['url'])
+    url = request.form['url']
+    return render_template('stats.html', url=url)
 
 
 @app.route('/data', methods=['POST'])
-def dataRequest():
+def data_endpoint():
     url = request.form['url']
-    scraper = MotoScraper(url)
-    data = prepare_full_data(scraper.data)
-
+    scraper = MotoScraper()
+    offers = scraper.get_offers(url)
+    data = prepare_full_data(offers)
     return data
-
 
 
 if __name__ == "__main__":
